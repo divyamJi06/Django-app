@@ -13,19 +13,24 @@ def story(req, link):
     images = web_story.images.all()
     imagesData = []
     for image in images:
-
+        newText = image.text
+        if image.text=="some-text":
+            newText = " "
         imagesData.append(
             {
                 'image': image.image_url,
-                'text': image.text,
+                'text': newText,
                 'pos': image.pos,
                 # 'extension': image.extension
             }
         )
+    newText = web_story.cover_text
+    if newText=="some-text":
+        newText = " "
     data = {
         'cover': {
             'image': web_story.cover_url,
-            'text': web_story.cover_text,
+            'text': newText,
             'title': web_story.cover_title,
         },
         'images': imagesData
