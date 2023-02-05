@@ -6,7 +6,22 @@ from .serializers import WebStorySerializer
 
 
 def index(req):
+    return render(req, 'index.html')
     return HttpResponse("HELLO TO INSED PAGE")
+def about(req):
+    return render(req, 'about.html')
+
+    # return HttpResponse("HELLO TO ABOUT PAGE")
+def contact(req):
+    return render(req, 'contact.html')
+    return HttpResponse("HELLO TO CONTACT PAGE")
+
+
+def contact_submit(req):
+    if(req.method=="POST"):
+        name  = req.POST.get("name")
+        print(name)
+    return HttpResponse("Response Recorded.<br><br><a href='/'>Go to Home Page</a>")
 
 def story(req, link):
     web_story = WebStory.objects.get(permalink=link)
@@ -73,31 +88,15 @@ def create_story(req):
         
     return JsonResponse({'data':serializer.data,"message":"Successfully Inserted"},status=200)
 
+def robots(req):
+    return render(req,'robots.txt', content_type='text/plain')
 
-# @api_view(['POST'])
-# def create_web_story(request):
-#     if request.method == 'POST':
-#         data = request.POST.get('data')
-#         web_story_data = data.get('web_story')
-        
-#         web_story = WebStory.objects.create(
-#             permalink=web_story_data.get('permalink'),
-#             cover_url=web_story_data.get('cover_url'),
-#             cover_text=web_story_data.get('cover_text'),
-#             cover_title=web_story_data.get('cover_title'),
-#             cover_extension=web_story_data.get('cover_extension')
-#         )
-        
-#         for image_data in data.get('images'):
-#             Image.objects.create(
-#                 web_story=web_story,
-#                 text=image_data.get('text'),
-#                 image_url=image_data.get('image_url'),
-#                 pos=image_data.get('pos'),
-#                 extension=image_data.get('extension')
-#             )
-        
-#         return render(request, 'web_story_created.html', {'web_story': web_story})
-#     return render(request, 'create_web_story.html')
+def handler404(request, exception,template_name= "404.html"):
+    response = render(request,template_name)
+    response.status_code = 404
+    return response
 
-
+# def handler500(request, exception,template_name= "500.html"):
+#     response = render(request,template_name)
+#     response.status_code = 500
+#     return response

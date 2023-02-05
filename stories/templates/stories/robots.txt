@@ -1,0 +1,3 @@
+User-Agent: *
+Allow: / 
+Sitemap: https://django-app-production.up.railway.app/sitemap.xml

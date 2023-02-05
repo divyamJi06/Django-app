@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <style>
+          .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .header h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0;
+      }
+      .header nav {
+        display: flex;
+        align-items: center;
+      }
+      .header nav a {
+        font-size: 18px;
+        margin-left: 20px;
+        text-decoration: none;
+        color: #333;
+      }
+    .contact-form {
+      width: 60%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+        max-width: 1170px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+  </style>
+</head>
+<body>
+    <div class="container">
+    <header class="header">
+        <h1>Web Stories</h1>
+        <nav>
+          <a href="about">About</a>
+          <a href="contact">Contact Us</a>
+        </nav>
+      </header>
+  <div class="contact-form">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you! Please fill out the form below and we'll get back to you as soon as possible.</p>
+    <form action="contact_submit/" method="post">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="name" name="name" >
+        <label class="mdl-textfield__label" for="name">Name</label>
+      </div>
+      
+      {% csrf_token %}
+      <br><br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="phone" required>
+        <label class="mdl-textfield__label" for="phone">Phone</label>
+      </div>
+      <br><br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="email" id="email">
+        <label class="mdl-textfield__label" for="email">Email</label>
+      </div>
+      <br><br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <textarea class="mdl-textfield__input" type="text" rows= "3" id="message"></textarea>
+        <label class="mdl-textfield__label" for="message">Message</label>
+      </div>
+      <br><br>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        Submit
+      </button>
+    </form>
+  </div>
+
+  </div>
+</body>
+</html>
