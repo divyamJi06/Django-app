@@ -23,4 +23,5 @@ urlpatterns = [
     path("story/<str:link>",views.story,name='story'),
     path("sitemap.xml",sitemap,{'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap'),
     path("robots.txt",views.robots,name='robots'),
+    path("google",views.google,name='google'),
 ]

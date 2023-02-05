@@ -91,6 +91,9 @@ def create_story(req):
 def robots(req):
     return render(req,'robots.txt', content_type='text/plain')
 
+def google(req):
+    return render(req,'googleb02030bfd53db826.html')
+
 def handler404(request, exception,template_name= "404.html"):
     response = render(request,template_name)
     response.status_code = 404
