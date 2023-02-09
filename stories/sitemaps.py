@@ -6,7 +6,7 @@ from .models import WebStory
 class WebStorySitemap(Sitemap):
     changefreq = "daily"
     priority = 0.8
-    # protocol = 'http'
+    protocol = 'https'
 
     def items(self):
         return WebStory.objects.all()
@@ -16,6 +16,7 @@ class WebStorySitemap(Sitemap):
 
 class StaticViewSitemap(Sitemap):
     changefreq = 'monthly'
+    protocol =  'https'
 
     def items(self):
         return ['index', 'about', 'contact']
