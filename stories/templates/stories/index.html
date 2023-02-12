@@ -62,21 +62,15 @@
       </header>
       <div class="web-stories">
         <!-- Add your web stories here -->
+        {% for story in webstories %}
         <div class="web-story">
-          <h2>Web Story 1</h2>
-          <img src="https://via.placeholder.com/300x200" alt="Web Story 1">
-          <a href="#">Read More</a>
-        </div>
-        <div class="web-story">
-          <h2>Web Story 2</h2>
-          <img src="https://via.placeholder.com/300x200" alt="Web Story 2">
-          <a href="#">Read More</a>
-        </div>
-        <div class="web-story">
-          <h2>Web Story 3</h2>
-          <img src="https://via.placeholder.com/300x200" alt="Web Story 3">
-          <a href="#">Read More</a>
-        </div>
+          <h2>{{story.title}}</h2>
+          <a href="/story/{{story.link}}">
+          <img src="{{story.image}}" alt="{{story.title}}">
+            Read More
+          </a>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </body>

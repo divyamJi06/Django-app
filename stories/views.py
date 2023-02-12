@@ -6,8 +6,18 @@ from .serializers import WebStorySerializer
 
 
 def index(req):
-    return render(req, 'index.html')
-    return HttpResponse("HELLO TO INSED PAGE")
+    data = {}
+    storyList = []
+    webstories = WebStory.objects.all()
+    for story in webstories:
+        storyList.append({
+            'image' : story.images.first().image_url,
+            'link' : story.permalink,
+            'title' : story.cover_title,
+        })
+    data['webstories'] = storyList
+    return render(req, 'index.html',data)
+
 def about(req):
     return render(req, 'about.html')
 
