@@ -13,6 +13,7 @@
     <script async custom-element="amp-story"
         src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
+    <meta name="description" content="{{cover.title}}">
     <style amp-custom>
       amp-story {
         font-family: 'Oswald',sans-serif;
@@ -59,7 +60,6 @@
     </style>
   </head>
   <body>
-    <!-- Cover page -->
     <amp-story standalone
         title="{{cover.title}}"
         publisher="AAP tutorials"
@@ -68,7 +68,6 @@
       <amp-story-page id="cover">
         <amp-story-grid-layer template="fill">
           <amp-img src="{{ cover.image }}"
-          {% comment %} <amp-img src="https://drive.google.com/file/d/1gMadJ5Bz9taGV_q4iCvNdPla8DWJjpWP" {% endcomment %}
               width="720" height="1280"
               layout="responsive">
           </amp-img>
@@ -80,7 +79,6 @@
       </amp-story-page>
 
         {% for image in images %}
-                  <!-- Page 2 (Dog): 2 layers (fill + thirds) -->
                 <amp-story-page id="page{{image.pos}}">
                     <amp-story-grid-layer template="fill">
                     <amp-img src="{{ image.image }}" 
@@ -92,9 +90,6 @@
                     <p>{{ image.text }}</p>
                 </amp-story-page> 
         {% endfor %}
-
-      <!-- Bookend -->
-      {% comment %} <amp-story-bookend src="bookend.json" layout="nodisplay"></amp-story-bookend> {% endcomment %}
-    </amp-story>
+      </amp-story>
   </body>
 </html>

@@ -1,7 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from stories.models import WebStory
+from stories.models import AllImage, WebStory
 from rest_framework.decorators import api_view
+from websstories.settings import TOKEN
 from .serializers import WebStorySerializer
 
 
@@ -20,6 +21,34 @@ def index(req):
 
 def about(req):
     return render(req, 'about.html')
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
+@csrf_exempt
+def uploadPosts(request):
+    if request.method == 'POST':
+        authorization_header = request.headers.get('Authorization')
+        print(authorization_header)
+        if authorization_header:
+            token = authorization_header
+            if token == TOKEN:
+                image = request.FILES.get('image')
+                image_title = request.POST.get('image_title')
+                if image:
+                    try:
+                        all_image = AllImage(image=image, image_title=image_title)
+                        all_image.save()
+                        image_url = all_image.image.url
+                        return JsonResponse({'success': True,'image_url': image_url})
+                    except Exception as e:
+                        return JsonResponse({'success': False, 'error': str(e)})
+            else:
+                return JsonResponse({'success': False, 'error': 'Invalid Authorization Token'})
+        else:
+            return JsonResponse({'success': False, 'error': 'Authorization header not found'})
+    return JsonResponse({'success': False, 'error': 'Bad Request'})
+
 
     # return HttpResponse("HELLO TO ABOUT PAGE")
 def contact(req):

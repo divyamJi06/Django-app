@@ -25,3 +25,10 @@ class Image(models.Model):
     def __str__(self):
         return f"{self.web_story} - {self.pos}"
 
+
+def upload_to_location(instance, filename):
+    return "images/{}".format(instance.image_title)
+
+class AllImage(models.Model):
+    image = models.ImageField(upload_to=upload_to_location)
+    image_title = models.CharField(max_length=255)
