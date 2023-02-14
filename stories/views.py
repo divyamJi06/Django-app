@@ -29,7 +29,6 @@ from django.http import JsonResponse
 def uploadPosts(request):
     if request.method == 'POST':
         authorization_header = request.headers.get('Authorization')
-        print(authorization_header)
         if authorization_header:
             token = authorization_header
             if token == TOKEN:
@@ -114,18 +113,27 @@ def story(req, link):
     return render(req, 'story.html', data)
 
 @api_view(['POST'])
-def create_story(req):
+def create_story(request):
+        authorization_header = request.headers.get('Authorization')
+        if authorization_header:
+            token = authorization_header
+            if token == TOKEN:
+                print(request.data)
+                serializer = WebStorySerializer(data=request.data)
+                if(serializer.is_valid()):
+                    serializer.save()
+                    return JsonResponse({'data':serializer.data,"message":"Successfully Inserted",'status':True})
+                else :
+                    print("Dgd")
+                    print(serializer.errors)
+                    return JsonResponse({'message': 'Some error while adding. Try again after some time ', 'status':False})
+                    
 
-    print(req.data)
-    serializer = WebStorySerializer(data=req.data)
-    if(serializer.is_valid()):
-        serializer.save()
-    else :
-        print("Dgd")
-        print(serializer.errors)
-        return JsonResponse({'message': 'Some error while adding. Try again after some time '}, status=400)
-        
-    return JsonResponse({'data':serializer.data,"message":"Successfully Inserted"},status=200)
+            else:
+                return JsonResponse({'success': False, 'error': 'Invalid Authorization Token'})
+        else:
+            return JsonResponse({'success': False, 'error': 'Authorization header not found'})
+
 
 def robots(req):
     return render(req,'robots.txt', content_type='text/plain')
