@@ -85,6 +85,7 @@ def story(req, link):
             'image': web_story.cover_url,
             'text': newText,
             'title': web_story.cover_title,
+            "description": ". ".join([image['text'] for image in imagesData])
         },
         'images': imagesData
     }
